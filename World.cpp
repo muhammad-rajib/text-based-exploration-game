@@ -24,7 +24,7 @@ void worldLoadAll(World world, string game_name)
 {
     worldLoadNodes(world, game_name + "_grid.txt");
 
-    //worldLoadDescriptions(world, game_name + "_text.txt");
+    worldLoadDescriptions(world, game_name + "_text.txt");
 }
 
 void worldLoadNodes(World world, string filename)
@@ -164,7 +164,7 @@ void worldFindValue(const World world, int &row, int &column,
     }
 }
 
-void worldLoadDescriptions(string filename)
+void worldLoadDescriptions(World world, string filename)
 {
     string tempDescription;
     ifstream readDescription;
@@ -199,7 +199,6 @@ void worldLoadDescriptions(string filename)
 
 void worldPrintDescription(const World world, int row, int column)
 {
-    worldLoadDescriptions("blizzard_text.txt");
     int des_num = world[row][column];
     cout << descriptions[des_num] << endl;
 }

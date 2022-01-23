@@ -26,8 +26,8 @@ int main()
 
     // load the world
     World world;
-    worldLoadNodes(world, "blizzard_grid.txt");
-    
+    worldLoadAll(world, "blizzard");
+
     // start node
     int row = 4;
     int column = 1;
