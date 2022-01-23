@@ -1,0 +1,367 @@
+PS C:\Assignment\game> .\a.exe
+Welcome to Blizzard Valley!
+You and six children were hiking in the mountains when an
+unexpected blizzard blew up.  Find the children and get them all
+back to the hiking lodge on the other side of the river.
+
+You are at a bend on a steep mountain trail running along the
+top of a cliff.  The trail leads north and west from here. Icy
+cliffs to the east and south lead to a rushing river below.
+
+Next? # Testcase 1E
+Next? # -----------
+Next? # Test all invalid move commands
+Next?
+Invalid command!
+Next? # test north into inaccessible  
+Next? n
+You are at a T-junction on a north/south mountain trail.  From  
+here, a narrower trail leads east.  There is impenetrable forest
+to the west and the trial opens up to the north.
+
+Next? e
+You are near some picnic tables close to the top of a cliff.  A
+narrow trail leads west and there is a rushing river at the    
+bottom of icy cliffs to the east and south.  You can see a     
+steep, icy path leading down the cliff to a frozen stretch of  
+the river to the east.
+
+Next? n
+There is no way to go in that direction
+Next? w
+You are at a T-junction on a north/south mountain trail.  From  
+here, a narrower trail leads east.  There is impenetrable forest
+to the west and the trial opens up to the north.
+
+Next? n
+You are on a mountain slope, lost in the raging blizzard.
+Everything is white.
+
+Next? n
+You are on a mountain slope, lost in the raging blizzard.
+Everything is white.
+
+Next? e
+You are on a mountain slope, lost in the raging blizzard.
+Everything is white.
+
+Next? n
+You are on a mountain slope, lost in the raging blizzard.
+Everything is white.
+
+Next? e
+You are on a massive snowdrift, packed hard by the driving wind.
+There is an open area to the west and broken rocks to the east.
+To the north and south are impenetrable forest.
+
+Next? s
+There is no way to go in that direction
+Next? e
+You are picking your way among large, irregular rocks.  Gusts of
+wind blow the falling snow this way and that.  Much of it ends
+up blowing to the west, where it piles onto a massive snowdrift.
+There are also gaps between the rocks leading east and south.
+
+Next? s
+You are on the north bank of a rushing river, at the edge of an
+area filled with large rocks.  There is a rusty iron footbridge
+to the south and an impenetrable forest to the east.  Gaps lead
+between the rocks to the north and east.
+
+Next? s
+You are on a rusty iron bridge over a rushing river.  Through
+the blowing snow, you can see large rocks on the north bank and
+a forest on the south one.  You could also climb down onto the
+ice bordering the river to the east and west.
+
+Next? s
+You are on the bank of a rushing river, just inside the edge of
+a forest.  There is a rusty iron bridge to the north and a path
+leads into the trees to the east.  To the west, the river has
+frozen over, forming an ice bridge.
+
+Next? e
+You are at a T-junction on a forest path.  The main path leads
+south and west, and a fainter trail leads down to a rushing
+river to the north.
+
+Next? e
+There is no way to go in that direction
+Next? s
+You are on a north/south path through the forest.  Stately
+lodgepole pines stand like pillars around you.  Little snow
+falls here, and the wind is calmer.
+
+Next? w
+There is no way to go in that direction
+Next? n
+You are at a T-junction on a forest path.  The main path leads
+south and west, and a fainter trail leads down to a rushing
+river to the north.
+
+Next? w
+You are on the bank of a rushing river, just inside the edge of
+a forest.  There is a rusty iron bridge to the north and a path
+leads into the trees to the east.  To the west, the river has
+frozen over, forming an ice bridge.
+
+Next? n
+You are on a rusty iron bridge over a rushing river.  Through
+the blowing snow, you can see large rocks on the north bank and
+a forest on the south one.  You could also climb down onto the
+ice bordering the river to the east and west.
+
+Next? n
+You are on the north bank of a rushing river, at the edge of an
+area filled with large rocks.  There is a rusty iron footbridge
+to the south and an impenetrable forest to the east.  Gaps lead
+between the rocks to the north and east.
+
+Next? n
+You are picking your way among large, irregular rocks.  Gusts of
+wind blow the falling snow this way and that.  Much of it ends
+up blowing to the west, where it piles onto a massive snowdrift.
+There are also gaps between the rocks leading east and south.
+
+Next? n
+There is no way to go in that direction
+Next? s
+You are on the north bank of a rushing river, at the edge of an
+area filled with large rocks.  There is a rusty iron footbridge
+to the south and an impenetrable forest to the east.  Gaps lead
+between the rocks to the north and east.
+
+Next? s
+You are on a rusty iron bridge over a rushing river.  Through
+the blowing snow, you can see large rocks on the north bank and
+a forest on the south one.  You could also climb down onto the
+ice bordering the river to the east and west.
+
+Next? s
+You are on the bank of a rushing river, just inside the edge of
+a forest.  There is a rusty iron bridge to the north and a path
+leads into the trees to the east.  To the west, the river has
+frozen over, forming an ice bridge.
+
+Next? s
+There is no way to go in that direction
+Next? e
+You are at a T-junction on a forest path.  The main path leads
+south and west, and a fainter trail leads down to a rushing
+river to the north.
+
+Next? s
+You are on a north/south path through the forest.  Stately
+lodgepole pines stand like pillars around you.  Little snow
+falls here, and the wind is calmer.
+
+Next? s
+You are at an open T-junction, where an east/west path meets
+one running north.  Around you, smaller aspen trees grow,
+taking advantage of the light.  Nestled on the ground between
+them are tiny evergreens.
+
+Next? s
+There is no way to go in that direction
+Next? e
+You are on an east/west forest path.  Here, wooden boards have
+been laid across a small stream bed.
+
+Next? e
+You are in a flat forest clearing at the bottom of a smooth,
+steep hill.  The top of the hill is to the east and paths lead
+into the forest to the north and west.
+
+Next? e
+You are at the top of the hill.  There is a smooth slope down
+to the west, and impenetrable forest to the north, east, and
+south.
+
+Next? e
+There is no way to go in that direction
+Next? w
+You are in a flat forest clearing at the bottom of a smooth,
+steep hill.  The top of the hill is to the east and paths lead
+into the forest to the north and west.
+
+Next? w
+You are on an east/west forest path.  Here, wooden boards have
+been laid across a small stream bed.
+
+Next? w
+You are at an open T-junction, where an east/west path meets
+one running north.  Around you, smaller aspen trees grow,
+taking advantage of the light.  Nestled on the ground between
+them are tiny evergreens.
+
+Next? n
+You are on a north/south path through the forest.  Stately
+lodgepole pines stand like pillars around you.  Little snow
+falls here, and the wind is calmer.
+
+Next? n
+You are at a T-junction on a forest path.  The main path leads
+south and west, and a fainter trail leads down to a rushing
+river to the north.
+
+Next? w
+You are on the bank of a rushing river, just inside the edge of
+a forest.  There is a rusty iron bridge to the north and a path
+leads into the trees to the east.  To the west, the river has
+frozen over, forming an ice bridge.
+
+Next? n
+You are on a rusty iron bridge over a rushing river.  Through
+the blowing snow, you can see large rocks on the north bank and
+a forest on the south one.  You could also climb down onto the
+ice bordering the river to the east and west.
+
+Next? n
+You are on the north bank of a rushing river, at the edge of an
+area filled with large rocks.  There is a rusty iron footbridge
+to the south and an impenetrable forest to the east.  Gaps lead
+between the rocks to the north and east.
+
+Next? n
+You are picking your way among large, irregular rocks.  Gusts of
+wind blow the falling snow this way and that.  Much of it ends
+up blowing to the west, where it piles onto a massive snowdrift.
+There are also gaps between the rocks leading east and south.
+
+Next? w
+You are on a massive snowdrift, packed hard by the driving wind.
+There is an open area to the west and broken rocks to the east.
+To the north and south are impenetrable forest.
+
+Next? w
+You are on a mountain slope, lost in the raging blizzard.
+Everything is white.
+
+Next? s
+You are on a mountain slope, lost in the raging blizzard.
+Everything is white.
+
+Next? w
+You are on a mountain slope, lost in the raging blizzard.
+Everything is white.
+
+Next? s
+You are on a mountain slope, lost in the raging blizzard.
+Everything is white.
+
+Next? s
+You are at a T-junction on a north/south mountain trail.  From
+here, a narrower trail leads east.  There is impenetrable forest
+to the west and the trial opens up to the north.
+
+Next? s
+You are at a bend on a steep mountain trail running along the
+top of a cliff.  The trail leads north and west from here. Icy
+cliffs to the east and south lead to a rushing river below.
+
+Next? w
+You are at the west end of a trail at the top of an icy cliff.
+The trail once continued west, but it is now blocked by a huge
+snowdrift.  There is impenetrable forest to the north and a
+rushing river below you to the south.
+
+Next? w
+There is no way to go in that direction
+Next? e
+You are at a bend on a steep mountain trail running along the
+top of a cliff.  The trail leads north and west from here. Icy
+cliffs to the east and south lead to a rushing river below.
+
+Next? n
+You are at a T-junction on a north/south mountain trail.  From
+here, a narrower trail leads east.  There is impenetrable forest
+to the west and the trial opens up to the north.
+
+Next? n
+You are on a mountain slope, lost in the raging blizzard.
+Everything is white.
+
+Next? n
+You are on a mountain slope, lost in the raging blizzard.
+Everything is white.
+
+Next? n
+You are on a mountain slope, lost in the raging blizzard.
+Everything is white.
+
+Next? e
+You are on a mountain slope, lost in the raging blizzard.
+Everything is white.
+
+Next? e
+You are on a massive snowdrift, packed hard by the driving wind.
+There is an open area to the west and broken rocks to the east.
+To the north and south are impenetrable forest.
+
+Next? e
+You are picking your way among large, irregular rocks.  Gusts of
+wind blow the falling snow this way and that.  Much of it ends
+up blowing to the west, where it piles onto a massive snowdrift.
+There are also gaps between the rocks leading east and south.
+
+Next? s
+You are on the north bank of a rushing river, at the edge of an
+area filled with large rocks.  There is a rusty iron footbridge
+to the south and an impenetrable forest to the east.  Gaps lead
+between the rocks to the north and east.
+
+Next? s
+You are on a rusty iron bridge over a rushing river.  Through
+the blowing snow, you can see large rocks on the north bank and
+a forest on the south one.  You could also climb down onto the
+ice bordering the river to the east and west.
+
+Next? s
+You are on the bank of a rushing river, just inside the edge of
+a forest.  There is a rusty iron bridge to the north and a path
+leads into the trees to the east.  To the west, the river has
+frozen over, forming an ice bridge.
+
+Next? e
+You are at a T-junction on a forest path.  The main path leads
+south and west, and a fainter trail leads down to a rushing
+river to the north.
+
+Next? s
+You are on a north/south path through the forest.  Stately
+lodgepole pines stand like pillars around you.  Little snow
+falls here, and the wind is calmer.
+
+Next? s
+You are at an open T-junction, where an east/west path meets
+one running north.  Around you, smaller aspen trees grow,
+taking advantage of the light.  Nestled on the ground between
+them are tiny evergreens.
+
+Next? e
+You are on an east/west forest path.  Here, wooden boards have
+been laid across a small stream bed.
+
+Next? e
+You are in a flat forest clearing at the bottom of a smooth,
+steep hill.  The top of the hill is to the east and paths lead
+into the forest to the north and west.
+
+Next? n
+You are on a north/south path through the forest.  Stately
+lodgepole pines stand like pillars around you.  Little snow
+falls here, and the wind is calmer.
+
+Next? n
+You are at the north end of a forest path.  To the east, you
+can see a large wooden building with light shining from the
+windows.
+
+Next? e
+You are in a warm lodge in the mountains.  The cold wind cannot
+reach here, and a merry fire burns in the fireplace.  A blizzard
+rages outside the door to the west, but you're out of it now.
+
+
+Thank you for playing Blizzard Valley!
+PS C:\Assignment\game>
