@@ -1,7 +1,0 @@
-# Testcase 1B
-# -----------
-# Test quit command
-q
-n
-q
-y
