@@ -78,6 +78,7 @@ int main()
 
     // description for player current possition
     worldPrintDescription(world, row, column);
+    printItemDescription(row, column);
     
     // Main Loop
     while (true)
@@ -122,6 +123,7 @@ int main()
             {
                 row--;
                 worldPrintDescription(world, row, column);
+                printItemDescription(row, column);
             }
             else
                 cout << "There is no way to go in that direction" << endl;
@@ -133,6 +135,7 @@ int main()
             {
                 row++;
                 worldPrintDescription(world, row, column);
+                printItemDescription(row, column);
             }
             else
                 cout << "There is no way to go in that direction" << endl;
@@ -144,6 +147,7 @@ int main()
             {
                 column++;
                 worldPrintDescription(world, row, column);
+                printItemDescription(row, column);
             }
             else
                 cout << "There is no way to go in that direction" << endl;
@@ -155,6 +159,7 @@ int main()
             {
                 column--;
                 worldPrintDescription(world, row, column);
+                printItemDescription(row, column);
             }
             else
                 cout << "There is no way to go in that direction" << endl;
@@ -239,7 +244,6 @@ int main()
                 {
                     total_points = total_points - itemGetPlayerPoints(Items[0]);
                     itemMoveToLocation(Items[0], row, column);
-                    //itemReset(Items[0]);
                 }
             }
             else if (player_input[0] == 'b')
