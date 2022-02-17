@@ -15,11 +15,14 @@ Location::Location (int row1, int column1) {
     column = column1;
 }
 
-bool Location::operator==(const Location& other) const{
-    return other.row == other.row && other.column == other.column;
+bool Location::operator == (const Location& other) const{
+    if (row == other.row && column == other.column)
+        return true;
+    else
+        return false;
 }
 
-ostream& operator<< (ostream &out, const Location &location)
+ostream& operator << (ostream &out, const Location &location)
 {
     out << "(row = " << location.row << ", column = " << location.column << ")";
     return out;
