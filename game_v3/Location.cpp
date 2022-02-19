@@ -22,7 +22,7 @@ bool Location::operator == (const Location& other) const{
         return false;
 }
 
-ostream& operator << (ostream &out, const Location &location)
+ostream& operator << (ostream &out, const Location& location)
 {
     out << "(row = " << location.row << ", column = " << location.column << ")";
     return out;

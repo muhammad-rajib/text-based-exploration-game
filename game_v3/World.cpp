@@ -1,43 +1,33 @@
 #include <string>
 #include <iostream>
 #include <fstream>
-
+#include <cassert>
 using namespace std;
 
 #include "World.h"
 
-string descriptions[DESCRIPTION_COUNT];
+string descriptions[MAX_DESCRIPTION_COUNT];
 
 
-void worldClear(World world)
+World::World (const string& game_name)
 {
-    for (int i = 0; i < ROW_COUNT; i++)
-    {
-        for (int j = 0; j < COLUMN_COUNT; j++)
-        {
-            world[i][j] = INACCESSIBLE;
-        }
-    }
+    loadNodes(game_name + "_grid.txt");
+    loadDescriptions(game_name + "_text.txt");
+
+    assert(isInvariantTrue());
 }
 
-void worldLoadAll(World world, string game_name)
-{
-    worldLoadNodes(world, game_name + "_grid.txt");
-
-    worldLoadDescriptions(world, game_name + "_text.txt");
-}
-
-void worldLoadNodes(World world, string filename)
+void World::loadNodes(const string& filename)
 {
     ifstream fp(filename);
     if (!fp)
         cout << "Error, file couldn't be opened" << endl;
 
-    for (int row = 0; row < 6; row++)
+    for (int row = 0; row < ROW_COUNT; row++)
     {
-        for (int column = 0; column < 9; column++)
+        for (int column = 0; column < COLUMN_COUNT; column++)
         {
-            fp >> world[row][column];
+            fp >> nodes[row][column];
             if (!fp)
             {
                 cout << "Error reading file for element " << row << "," << column << endl;
@@ -46,116 +36,137 @@ void worldLoadNodes(World world, string filename)
     }
 }
 
-void worldDebugPrint(const World world)
+bool World::isInvariantTrue () const
+{
+    if (description_count > MAX_DESCRIPTION_COUNT)
+        return false;
+    if (descriptions[description_count] == "")
+        return false;
+    if (nodes[ROW_COUNT][COLUMN_COUNT] > description_count)
+        return false;
+
+    return true;
+}
+
+void World::debugPrint() const
 {
     for (int i = 0; i < ROW_COUNT; i++)
     {
         for (int j = 0; j < COLUMN_COUNT; j++)
         {
             if (j == COLUMN_COUNT - 1)
-                cout << world[i][j];
+                cout << nodes[i][j];
             else
-                cout << world[i][j] << "\t";
+                cout << nodes[i][j] << "\t";
         }
         cout << endl;
     }
+
+    cout << description_count << endl;
+    // descriptions
+    for (int des_no = 0; des_no <= description_count; des_no++)
+    {
+        cout << descriptions[des_no] << endl;
+    }
 }
 
-bool worldIsValid(const World world, int row, int column)
+bool World::isValid(const Location& location) const
 {
-    if ((row < 0) || (row >= ROW_COUNT) || (column < 0) || (column >= COLUMN_COUNT))
-    {
+    assert(isInvariantTrue());
+
+    if ((location.row < 0) || (location.row >= ROW_COUNT) || (location.column < 0) || (location.column >= COLUMN_COUNT))
         return false;
-    }
     else
-    {
         return true;
-    }
 }
 
-bool worldCanGoNorth(const World world, int row, int column)
+bool World::isDeath(const Location& location) const
 {
-    if (row > 0 && world[row - 1][column] != INACCESSIBLE)
-    {
+    assert(isInvariantTrue());
+    assert (nodes[location.row][location.column] == isValid(location));
+}
+
+bool World::isVictory(const Location& location) const
+{
+    assert(isInvariantTrue());
+
+    if (nodes[location.row][location.column] == 5)
         return true;
-    }
     else
-    {
         return false;
-    }
 }
 
-bool worldCanGoSouth(const World world, int row, int column)
+bool World::canGoNorth(const Location& location) const
 {
-    if (row < ROW_COUNT - 1 && world[row + 1][column] != INACCESSIBLE)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    assert(isInvariantTrue());
+    assert ((location.row > 0 && nodes[location.row - 1][location.column]) != INACCESSIBLE);
 }
 
-bool worldCanGoEast(const World world, int row, int column)
+bool World::canGoSouth(const Location& location) const
 {
-    if (column < COLUMN_COUNT - 1 && world[row][column + 1] != INACCESSIBLE)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    assert(isInvariantTrue());
+    assert (location.row < ROW_COUNT - 1 && nodes[location.row + 1][location.column] != INACCESSIBLE);
 }
 
-bool worldCanGoWest(const World world, int row, int column)
+bool World::canGoEast(const Location& location) const
 {
-    if (column > 0 && world[row][column - 1] != INACCESSIBLE)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    assert(isInvariantTrue());
+    assert (location.column < COLUMN_COUNT - 1 && nodes[location.row][location.column + 1] != INACCESSIBLE);
 }
 
-bool worldIsDeath(const World world, int row, int column)
+bool World::canGoWest(const Location& location) const
 {
-    if (world[row][column] == 3)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    assert(isInvariantTrue());
+    assert (location.column > 0 && nodes[location.row][location.column - 1] != INACCESSIBLE);
 }
 
-bool worldIsVictory(const World world, int row, int column)
+Location World::getNorth (const Location& location) const
 {
-    if (world[row][column] == 5)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    assert(isInvariantTrue());
+    assert(isInvariantTrue());
+    assert(isValid(location));
+    assert(canGoNorth(location));
+    int north_location = nodes[location.row][location.column];
 }
 
-void worldFindValue(const World world, int &row, int &column,
-                    NodeValue value_to_find)
+Location World::getSouth (const Location& location) const
 {
-    row = -1;
-    column = -1;
+    assert(isInvariantTrue());
+    assert(isInvariantTrue());
+    assert(isValid(location));
+    assert(canGoSouth(location));
+    int north_location = nodes[location.row][location.column]; 
+}
+
+Location World::getEast (const Location& location) const
+{
+    assert(isInvariantTrue());
+    assert(isInvariantTrue());
+    assert(isValid(location));
+    assert(canGoEast(location));
+    int north_location = nodes[location.row][location.column];
+}
+
+Location World::getWest (const Location& location) const
+{
+    assert(isInvariantTrue());
+    assert(isInvariantTrue());
+    assert(isValid(location));
+    assert(canGoWest(location));
+    int north_location = nodes[location.row][location.column];
+}
+
+Location World::getStart () const
+{
+    assert(isInvariantTrue());
+    int row = -1;
+    int column = -1;
 
     for (int i = 0; i < ROW_COUNT; i++)
     {
         for (int j = 0; j < COLUMN_COUNT; j++)
         {
-            if (world[i][j] == value_to_find)
+            if (nodes[i][j] == START_NODE)
             {
                 row = i;
                 column = j;
@@ -164,7 +175,7 @@ void worldFindValue(const World world, int &row, int &column,
     }
 }
 
-void worldLoadDescriptions(World world, string filename)
+void World::loadDescriptions(const string& filename)
 {
     string tempDescription;
     ifstream readDescription;
@@ -177,7 +188,7 @@ void worldLoadDescriptions(World world, string filename)
     getline(readDescription, tempDescription);
 
     int line = 0;
-    for (int i = 0; i <= DESCRIPTION_COUNT; i++)
+    for (int i = 0; i <= MAX_DESCRIPTION_COUNT; i++)
     {
         if (i == 0)
         {
@@ -194,17 +205,21 @@ void worldLoadDescriptions(World world, string filename)
             descriptions[line] = descriptions[line] + tempDescription + "\n";
         }
         line++;
+        description_count = description_count + 1;
     }
 }
 
-void worldPrintDescription(const World world, int row, int column)
+void World::printDescription(const Location& location) const
 {
-    int des_num = world[row][column];
+    assert(isInvariantTrue());
+    assert (isValid(location));
+    int des_num = nodes[location.row][location.column];
     cout << descriptions[des_num] << endl;
 }
 
-void worldPrintStartMessage(const World world)
+void World::printStartMessage() const
 {
+    assert(isInvariantTrue());
     cout << "Welcome to Blizzard Valley!\n"
             "You and six children were hiking in the mountains when an\n"
             "unexpected blizzard blew up.  Find the children and get them all\n"
@@ -212,7 +227,8 @@ void worldPrintStartMessage(const World world)
          << endl;
 }
 
-void worldPrintEndMessage(const World world)
+void World::printEndMessage() const
 {
+    assert(isInvariantTrue());
     cout << "Thank you for playing Blizzard Valley!" << endl;
 }

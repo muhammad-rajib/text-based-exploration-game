@@ -3,12 +3,16 @@
 #include <string>
 #include <iostream>
 
+#include "Location.h"
+
 using namespace std;
 
-const int ROW_COUNT = 6;
-const int COLUMN_COUNT = 9;
+const int ROW_COUNT = 10;
+const int COLUMN_COUNT = 10;
 
 typedef unsigned int NodeValue;
+
+const NodeValue MAX_DESCRIPTION_COUNT = 1000;
 
 const NodeValue INACCESSIBLE = 0;
 const NodeValue START_MESSAGE = 1;
@@ -16,49 +20,40 @@ const NodeValue END_MESSAGE = 2;
 const NodeValue DEATH_NODE = 3;
 const NodeValue START_NODE = 4;
 const NodeValue VICTORY_NODE = 5;
-
-const NodeValue DESCRIPTION_COUNT = 26;
-
-typedef NodeValue World [ROW_COUNT][COLUMN_COUNT];
+const Location NO_SUCH_VALUE(-1, -1);
 
 
-void worldClear (World world);
 
-void worldLoadAll (World world, string game_name);
+class World {
 
-void worldLoadNodes (World world, string filename);
+    private:
+        NodeValue nodes [ROW_COUNT][COLUMN_COUNT];
+        string descriptions[MAX_DESCRIPTION_COUNT];
+        unsigned int description_count;
 
-void worldDebugPrint (const World world);
+    private:
+        void loadNodes (const string& filename);
+        void loadDescriptions (const string& filename);
+        bool isInvariantValue () const; // new in A3
+        bool isInvariantTrue () const;
 
-bool worldIsValid (const World world,
-                   int row, int column);
+    public:
+        World (const string& game_name);
 
-bool worldCanGoNorth (const World world,
-                      int row, int column);
-
-bool worldCanGoSouth (const World world,
-                      int row, int column);
-
-bool worldCanGoEast  (const World world,
-                      int row, int column);
-
-bool worldCanGoWest  (const World world,
-                      int row, int column);
-
-bool worldIsDeath   (const World world,
-                     int row, int column);
-
-bool worldIsVictory (const World world,
-                     int row, int column);
-
-void worldFindValue (const World world,
-                     int& row, int& column,
-                     NodeValue value_to_find);
-
-void worldLoadDescriptions (World world, string filename);
-
-void worldPrintDescription (const World world,
-                            int row, int column);
-
-void worldPrintStartMessage (const World world);
-void worldPrintEndMessage (const World world);
+        void debugPrint () const;
+        bool isValid (const Location& location) const;
+        bool isDeath (const Location& location) const;
+        bool isVictory (const Location& location) const;
+        bool canGoNorth (const Location& location) const;
+        bool canGoSouth (const Location& location) const;
+        bool canGoEast (const Location& location) const;
+        bool canGoWest (const Location& location) const;
+        Location getNorth (const Location& location) const;
+        Location getSouth (const Location& location) const;
+        Location getEast (const Location& location) const;
+        Location getWest (const Location& location) const;
+        Location getStart () const;
+        void printStartMessage () const;
+        void printEndMessage () const;
+        void printDescription (const Location& location) const;
+};
