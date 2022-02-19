@@ -1,9 +1,8 @@
 #include <string>
 #include <iostream>
+using namespace std;
 
 #include "Location.h"
-
-using namespace std;
 
 Location::Location () {
     row = 0;

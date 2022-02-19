@@ -15,7 +15,7 @@
 //
 
 #include "World.h"
-#include "World.h"  // repeated to test for #include errors
+//#include "World.h"  // repeated to test for #include errors
 
 #include <cassert>
 #include <string>
