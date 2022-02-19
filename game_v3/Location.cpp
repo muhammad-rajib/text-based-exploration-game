@@ -16,7 +16,7 @@ Location::Location (int row1, int column1) {
 }
 
 bool Location::operator == (const Location& other) const{
-    if (row == other.row && column == other.column)
+    if (this->row == other.row && this->column == other.column)
         return true;
     else
         return false;
