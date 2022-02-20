@@ -12,7 +12,6 @@ World::World (const string& game_name)
 {
     loadNodes(game_name + "_grid.txt");
     loadDescriptions(game_name + "_text.txt");
-
     assert(isInvariantTrue());
 }
 
@@ -78,7 +77,6 @@ void World::loadDescriptions(const string& filename)
 // private: member func
 bool World::isInvariantTrue () const
 {
-    cout << description_count << endl;
     if (description_count > MAX_DESCRIPTION_COUNT)
         return false;
     
@@ -137,16 +135,22 @@ bool World::isValid(const Location& location) const
 bool World::isDeath(const Location& location) const
 {
     assert (isInvariantTrue());
-    assert (isValid(location));
+    if (!isValid(location))
+        return false;
+    if (nodes[location.row][location.column] == DEATH_NODE)
+        return true;
+    else
+        return false;
 }
 
 // public: member func
 bool World::isVictory(const Location& location) const
 {
     assert (isInvariantTrue());
-    assert (isValid(location));
 
-    if (nodes[location.row][location.column] == 5)
+    if (!isValid(location))
+        return false;
+    if (nodes[location.row][location.column] == VICTORY_NODE)
         return true;
     else
         return false;
@@ -204,28 +208,36 @@ bool World::canGoWest(const Location& location) const
 Location World::getNorth (const Location& location) const
 {
     assert(isInvariantTrue());
-    assert(canGoNorth(location));
+    Location loc(location.row-1, location.column);
+    if(canGoNorth(location) == true)
+        return loc; 
 }
 
 // public: member func
 Location World::getSouth (const Location& location) const
 {
     assert(isInvariantTrue());
-    assert(canGoSouth(location));
+    Location loc(location.row+1, location.column);
+    if(canGoSouth(location) == true)
+        return loc; 
 }
 
 // public: member func
 Location World::getEast (const Location& location) const
 {
     assert(isInvariantTrue());
-    assert(canGoEast(location));
+    Location loc(location.row, location.column+1);
+    if(canGoEast(location) == true)
+        return loc; 
 }
 
 // public: member func
 Location World::getWest (const Location& location) const
 {
     assert(isInvariantTrue());
-    assert(canGoWest(location));
+    Location loc(location.row, location.column-1);
+    if(canGoWest(location) == true)
+        return loc; 
 }
 
 // public: member func
@@ -252,23 +264,19 @@ void World::printDescription(const Location& location) const
     assert(isInvariantTrue());
     assert (isValid(location));
     int des_num = nodes[location.row][location.column];
-    cout << descriptions[des_num] << endl;
+    cout << descriptions[des_num];
 }
 
 // public: member func
 void World::printStartMessage() const
 {
     assert(isInvariantTrue());
-    cout << "Welcome to Blizzard Valley!\n"
-            "You and six children were hiking in the mountains when an\n"
-            "unexpected blizzard blew up.  Find the children and get them all\n"
-            "back to the hiking lodge on the other side of the river.\n"
-         << endl;
+    cout << descriptions[START_MESSAGE] << endl;
 }
 
 // public: member func
 void World::printEndMessage() const
 {
     assert(isInvariantTrue());
-    cout << "Thank you for playing Blizzard Valley!" << endl;
+    cout << descriptions[END_MESSAGE] << endl;
 }
