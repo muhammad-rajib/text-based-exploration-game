@@ -10,7 +10,7 @@ const char ID_NOT_INITIALIZED = '\0';
 
 
 class Item {
-    private:
+    public:
         char id;
         
         Location start_location;
