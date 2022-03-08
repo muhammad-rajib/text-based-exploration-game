@@ -7,7 +7,14 @@ using namespace std;
 #include "World.h"
 
 
-// public: constructor
+//
+// Constructor: World
+//
+// Purpose: load world nodes and descriptions
+// 
+//  <1> game_name: hold the file name of world nodes and descriptions files. 
+// Side effect: program will be failed for wrong file name. 
+//               
 World::World (const string& game_name)
 {
     loadNodes(game_name + "_grid.txt");
@@ -15,7 +22,6 @@ World::World (const string& game_name)
     assert(isInvariantTrue());
 }
 
-// private: member func
 void World::loadNodes(const string& filename)
 {
     ifstream fp(filename);
@@ -35,7 +41,6 @@ void World::loadNodes(const string& filename)
     }
 }
 
-// private: member func
 void World::loadDescriptions(const string& filename)
 {
     string tempDescription;
@@ -74,7 +79,6 @@ void World::loadDescriptions(const string& filename)
             description_count++;
 }
 
-// private: member func
 bool World::isInvariantTrue () const
 {
     if (description_count > MAX_DESCRIPTION_COUNT)
@@ -97,7 +101,6 @@ bool World::isInvariantTrue () const
     return true;
 }
 
-// public: member func
 void World::debugPrint() const
 {
     for (int i = 0; i < ROW_COUNT; i++)
@@ -113,14 +116,13 @@ void World::debugPrint() const
     }
 
     cout << description_count << endl;
-    // descriptions
+ 
     for (int des_no = 0; des_no <= description_count; des_no++)
     {
         cout << descriptions[des_no] << endl;
     }
 }
 
-// public: member func
 bool World::isValid(const Location& location) const
 {
     assert(isInvariantTrue());
@@ -131,7 +133,6 @@ bool World::isValid(const Location& location) const
         return true;
 }
 
-// public: member func
 bool World::isDeath(const Location& location) const
 {
     assert (isInvariantTrue());
@@ -143,7 +144,6 @@ bool World::isDeath(const Location& location) const
         return false;
 }
 
-// public: member func
 bool World::isVictory(const Location& location) const
 {
     assert (isInvariantTrue());
@@ -156,7 +156,6 @@ bool World::isVictory(const Location& location) const
         return false;
 }
 
-// public: member func
 bool World::canGoNorth(const Location& location) const
 {
     Location loc(location.row-1, location.column);
@@ -168,7 +167,6 @@ bool World::canGoNorth(const Location& location) const
         return true;
 }
 
-// public: member func
 bool World::canGoSouth(const Location& location) const
 {
     Location loc(location.row+1, location.column);
@@ -180,7 +178,6 @@ bool World::canGoSouth(const Location& location) const
         return true;
 }
 
-// public: member func
 bool World::canGoEast(const Location& location) const
 {
     Location loc(location.row, location.column+1);
@@ -192,7 +189,6 @@ bool World::canGoEast(const Location& location) const
         return true;
 }
 
-// public: member func
 bool World::canGoWest(const Location& location) const
 {
     Location loc(location.row, location.column-1);
@@ -204,7 +200,6 @@ bool World::canGoWest(const Location& location) const
         return true;
 }
 
-// public: member func
 Location World::getNorth (const Location& location) const
 {
     assert(isInvariantTrue());
@@ -213,7 +208,6 @@ Location World::getNorth (const Location& location) const
         return loc; 
 }
 
-// public: member func
 Location World::getSouth (const Location& location) const
 {
     assert(isInvariantTrue());
@@ -222,7 +216,6 @@ Location World::getSouth (const Location& location) const
         return loc; 
 }
 
-// public: member func
 Location World::getEast (const Location& location) const
 {
     assert(isInvariantTrue());
@@ -231,7 +224,6 @@ Location World::getEast (const Location& location) const
         return loc; 
 }
 
-// public: member func
 Location World::getWest (const Location& location) const
 {
     assert(isInvariantTrue());
@@ -240,7 +232,6 @@ Location World::getWest (const Location& location) const
         return loc; 
 }
 
-// public: member func
 Location World::getStart () const
 {
     assert(isInvariantTrue());
@@ -258,7 +249,6 @@ Location World::getStart () const
     return NO_SUCH_VALUE;
 }
 
-// public: member func
 void World::printDescription(const Location& location) const
 {
     assert(isInvariantTrue());
@@ -267,14 +257,12 @@ void World::printDescription(const Location& location) const
     cout << descriptions[des_num];
 }
 
-// public: member func
 void World::printStartMessage() const
 {
     assert(isInvariantTrue());
     cout << descriptions[START_MESSAGE] << endl;
 }
 
-// public: member func
 void World::printEndMessage() const
 {
     assert(isInvariantTrue());

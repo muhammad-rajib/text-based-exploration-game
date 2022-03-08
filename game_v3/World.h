@@ -1,3 +1,13 @@
+//
+// World.h
+//
+// This module provides all required variables and class of world
+// to represent the world. The world class bounded with member
+// variables and methods by access modifier.Data encapsulation 
+// is used to protect the state of world from client code or somewhere else
+// but public properties are accessed by anywhere.
+//
+
 #include <string>
 #include <iostream>
 using namespace std;
