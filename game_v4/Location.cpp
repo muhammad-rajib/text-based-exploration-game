@@ -1,28 +1,42 @@
-#include <string>
-#include <iostream>
-using namespace std;
+//
+//  Location.cpp
+//
 
 #include "Location.h"
 
-Location::Location () {
-    row = 0;
-    column = 0;
-}
+#include <iostream>
+#include <iomanip>
 
-Location::Location (int row1, int column1) {
-    row = row1;
-    column = column1;
-}
+using namespace std;
 
-bool Location::operator == (const Location& other) const{
-    if (this->row == other.row && this->column == other.column)
-        return true;
-    else
-        return false;
-}
 
-ostream& operator << (ostream &out, const Location& location)
+
+Location :: Location ()
+		: row(0),
+		  column(0)
 {
-    out << "(row = " << location.row << ", column = " << location.column << ")";
-    return out;
+}
+
+Location :: Location (int row1, int column1)
+		: row   (row1),
+		  column(column1)
+{
+}
+
+
+
+bool Location :: operator== (const Location& other) const
+{
+	return row    == other.row    &&
+	       column == other.column;
+}
+
+
+
+ostream& operator<< (ostream& out,
+                     const Location& location)
+{
+	cout << "(row = "     << setw(1) << right << location.row
+	     << ", column = " << setw(1) << right << location.column << ")";
+	return out;
 }
