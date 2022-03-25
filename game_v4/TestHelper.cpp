@@ -152,6 +152,23 @@ void testHelperPrintSummaryHeader (unsigned int indent,
 	testHelperPrintSummaryLine("Did not crash", true);
 }
 
+void testHelperPrintSummaryHeaderPartial (
+                                    unsigned int indent,
+                                    unsigned int max_digits,
+                                    unsigned int compile_marks)
+{
+	assert(max_digits >= 1);
+
+	summary_indent     = indent;
+	summary_max_digits = max_digits;
+
+	cout << "Summary (So Far):" << endl;
+	cout << "-----------------" << endl;
+	cout << endl;
+
+	testHelperPrintSummaryLine("Compiled and started", true);
+}
+
 void testHelperPrintSummaryLine (const std::string& text,
                                  bool is_correct)
 {
@@ -228,6 +245,21 @@ void testHelperPrintMark (unsigned int achieved,
 	cout << "Mark: " << achieved << " / " << maximum << endl;
 	if(achieved == maximum)
 		cout << "*** Perfect! ***" << endl;
+	cout << endl;
+}
+
+void testHelperPrintMarkPartial (unsigned int achieved,
+                                 unsigned int highest_possible,
+                                 unsigned int maximum)
+{
+	assert(maximum >= 1);
+	assert(achieved <= highest_possible);
+	assert(highest_possible < maximum);
+
+	cout << endl;
+	cout << "Mark: " << achieved << " / " << maximum << endl;
+	if(achieved == highest_possible)
+		cout << "*** Perfect so far! ***" << endl;
 	cout << endl;
 }
 

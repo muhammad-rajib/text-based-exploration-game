@@ -9,29 +9,14 @@
 #include <string>
 
 #include "Location.h"
+#include "Node.h"
 
 
 
-// blizzard
-//const int ROW_COUNT    = 6;
-//const int COLUMN_COUNT = 9;
-
-// ghostwood
-const int ROW_COUNT    = 10;
-const int COLUMN_COUNT = 10;
-
-typedef unsigned int NodeValue;
-
-const NodeValue INACCESSIBLE  = 0;
-const NodeValue START_MESSAGE = 1;
-const NodeValue END_MESSAGE   = 2;
-const NodeValue DEATH_NODE    = 3;
-const NodeValue START_NODE    = 4;
-const NodeValue VICTORY_NODE  = 5;
-
-const Location NO_SUCH_VALUE(-1, -1);
-
+const unsigned int MAX_NODE_COUNT        = 1000;
 const unsigned int MAX_DESCRIPTION_COUNT = 1000;
+
+const Location NO_SUCH_VALUE(-1);
 
 
 
@@ -41,12 +26,16 @@ const unsigned int MAX_DESCRIPTION_COUNT = 1000;
 //  A class to represent the world for the game.
 //
 //  Class Invariant:
-//    <1> description_count <= MAX_DESCRIPTION_COUNT
-//    <2> nodes[r][c] < description_count
-//                                   WHERE 0 <= r <    ROW_COUNT
-//                                   WHERE 0 <= c < COLUMN_COUNT
-//    <3> descriptions[d] != ""
-//                              WHERE 0 <= d < description_count
+//    <1> node_count <= MAX_NODE_COUNT
+//    <2> start_node < node_count
+//    <3> victory_node < node_count
+//    <4> description_count <= MAX_DESCRIPTION_COUNT
+//    <5> start_message < description_count
+//    <6> end_message < description_count
+//    <7> nodes[n].getDescription() < description_count
+//                                    WHERE 0 <= n < nodes_count
+//    <8> descriptions[d] != ""
+//                               WHERE 0 <= d < description_count
 //
 class World
 {
@@ -327,7 +316,7 @@ private:
 	void loadDescriptions (const std::string& filename);
 
 //
-//  invariant
+//  isInvariantTrue
 //
 //  Purpose: To determine if the class invariant is true.
 //  Parameter(s): N/A
@@ -335,11 +324,16 @@ private:
 //  Returns: Whether the class invariant is true.
 //  Side Effect: N/A
 //
-	bool invariant () const;
+	bool isInvariantTrue () const;
 
 private:
-	NodeValue nodes[ROW_COUNT][COLUMN_COUNT];
-	std::string descriptions[MAX_DESCRIPTION_COUNT];
+	Node         nodes[MAX_NODE_COUNT];
+	unsigned int node_count;
+	unsigned int start_node;
+	unsigned int victory_node;
+	unsigned int start_message;
+	unsigned int end_message;
+	std::string  descriptions[MAX_DESCRIPTION_COUNT];
 	unsigned int description_count;
 };
 

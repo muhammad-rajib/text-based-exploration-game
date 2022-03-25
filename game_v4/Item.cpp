@@ -22,7 +22,7 @@ Item :: Item ()
 	  inventory_description("[Item not initialized]")
 {
 	assert(!isInitialized());
-	assert(invariant());
+	assert(isInvariantTrue());
 }
 
 Item :: Item (char id1,
@@ -43,7 +43,7 @@ Item :: Item (char id1,
 	assert(inventory_description1 != "");
 
 	assert(isInitialized());
-	assert(invariant());
+	assert(isInvariantTrue());
 }
 
 
@@ -61,14 +61,14 @@ void Item :: debugPrint () const
 
 bool Item :: isInitialized () const
 {
-	assert(invariant());
+	assert(isInvariantTrue());
 
 	return id != ID_NOT_INITIALIZED;
 }
 
 char Item :: getId () const
 {
-	assert(invariant());
+	assert(isInvariantTrue());
 	assert(isInitialized());
 
 	return id;
@@ -76,7 +76,7 @@ char Item :: getId () const
 
 bool Item :: isInInventory () const
 {
-	assert(invariant());
+	assert(isInvariantTrue());
 	assert(isInitialized());
 
 	return is_in_inventory;
@@ -84,7 +84,7 @@ bool Item :: isInInventory () const
 
 bool Item :: isAtLocation (const Location& location) const
 {
-	assert(invariant());
+	assert(isInvariantTrue());
 	assert(isInitialized());
 
 	return !is_in_inventory && current == location;
@@ -92,7 +92,7 @@ bool Item :: isAtLocation (const Location& location) const
 
 int Item :: getPlayerPoints () const
 {
-	assert(invariant());
+	assert(isInvariantTrue());
 	assert(isInitialized());
 
 	if(is_in_inventory)
@@ -103,7 +103,7 @@ int Item :: getPlayerPoints () const
 
 void Item :: printDescription () const
 {
-	assert(invariant());
+	assert(isInvariantTrue());
 	assert(isInitialized());
 
 	if(is_in_inventory)
@@ -115,7 +115,7 @@ void Item :: printDescription () const
 // less than operator as a member function
 bool Item :: operator< (const Item& other) const
 {
-	assert(invariant());
+	assert(isInvariantTrue());
 	assert(isInitialized());
 	assert(other.isInitialized());
 
@@ -126,39 +126,39 @@ bool Item :: operator< (const Item& other) const
 
 void Item :: reset ()
 {
-	assert(invariant());
+	assert(isInvariantTrue());
 	assert(isInitialized());
 
 	current = start;
 	is_in_inventory = false;
 
-	assert(invariant());
+	assert(isInvariantTrue());
 }
 
 void Item :: moveToInventory ()
 {
-	assert(invariant());
+	assert(isInvariantTrue());
 	assert(isInitialized());
 
 	is_in_inventory = true;
 
-	assert(invariant());
+	assert(isInvariantTrue());
 }
 
 void Item :: moveToLocation (const Location& location)
 {
-	assert(invariant());
+	assert(isInvariantTrue());
 	assert(isInitialized());
 
 	current = location;
 	is_in_inventory = false;
 
-	assert(invariant());
+	assert(isInvariantTrue());
 }
 
 
 
-bool Item :: invariant () const
+bool Item :: isInvariantTrue () const
 {
 	if(world_description == "")
 		return false;

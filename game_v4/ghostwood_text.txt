@@ -1,4 +1,4 @@
-56
+62
 
 Invalid node.
 
@@ -12,7 +12,7 @@ Suddenly, the boards beneath you give way.  You tumble downwards
 in a shower of splintered wood and land with a painful crunch on
 the ground below. 
 All around you, you see glowing red eyes peering out of the
-dark.  Then hundreds of the hungry rats descend on you.
+dark.  Then hundreds of hungry rats descend on you.
 Better luck next game.
 
 You are at the north end of a tree-flanked lane.  To the north
@@ -236,6 +236,19 @@ You are at the south end of a forest path, on the north shore of
 a small pond.  There is a wrought iron fence to the east and
 forest to the west.
 
+Suddenly, a slippery board moves beneath you and you lose your
+balance and tumble into the water below.  You are trying to
+climb back up onto the island when a wave smashes your head
+against a rock and everything goes black.
+Better luck next game.
+
+You turn the doorknob and the door slams open, knocking you to
+the ground.  Rocks of all sizes fall inwards, half-burying you.
+You are trying to dig yourself out when you see glowing red
+eyes peering out from under the cauldren to the east.  Then
+hundreds of hungry rats descend on you.
+Better luck next game.
+
 The door is locked, but still sturdy.  You have no way past.
 
 You unlock the door with your iron key.
@@ -244,3 +257,14 @@ The door to the shed is covered in sticky spider webs and you
 can't get them off.
 
 You use your dagger to cut the spider webs on the shed.
+
+========================
+
+43: Chinese lantern (Physalis alkekengi)
+44: Wire netting bush (Corokia cotoneaster)
+45: Black batflower (Tacca chantrieri)
+47/48: Purple devil (Solanum atropurpureum)
+50: Doll's eyes (Actaea pachypoda)
+51: Octopus stinkhorn (Clathrus archeri)
+52: Spanish moss (Tillandsia usneoides)
+

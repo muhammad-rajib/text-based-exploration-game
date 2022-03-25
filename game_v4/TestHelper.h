@@ -5,6 +5,13 @@
 //
 //  Do not modify this file.
 //
+//  2022-01-17: Added a parameter to testHelperEndCapture to
+//              control whether to print captured output
+//  2022-02-14: Added testHelperPrintSummaryHeaderPartial
+//  2022-03-05: Added testHelperPrintMarkPartial
+//  2022-03-16: Improved output formatting
+//              testHelperConstant uses operator== instead of !=
+//
 
 #pragma once
 
@@ -97,7 +104,7 @@ bool testHelperConstant (TestType& constant_to_test,
 		std::cout << "* Incorrect: " << constant_name << " is not const" << std::endl;
 		return false;
 	}
-	else if(constant_to_test != constant_correct)
+	else if(!(constant_to_test == constant_correct))
 	{
 		std::cout << "* Incorrect: " << constant_name << " has incorrect value, should be " << constant_correct << std::endl;
 		return false;
@@ -203,6 +210,31 @@ void testHelperPrintSummaryHeader (
                                 unsigned int didnt_crash_marks);
 
 //
+//  testHelperPrintSummaryHeaderPartial
+//
+//  Purpose: To print the header text for a partial mark summary
+//           part way through the output.
+//  Parameter(s):
+//    <1> indent: How far to indent the results in the summary
+//    <2> max_digits: The maximum number of digits in a number
+//    <3> compile_marks: How many marks the student gets for the
+//                       program compiling and starting
+//  Precondition(s):
+//    <1> max_digits >= 1
+//  Returns: N/A
+//  Side Effect: The header for the summary test is printed.
+//               Summary lines printed after this will be
+//               indented so that the results begin indent
+//               characters to the right.  Numbers will be
+//               right-aligned as if they contain a maximum of
+//               max_digits digits.
+//
+void testHelperPrintSummaryHeaderPartial (
+                                    unsigned int indent,
+                                    unsigned int max_digits,
+                                    unsigned int compile_marks);
+
+//
 //  testHelperPrintSummaryLine
 //
 //  Purpose: To print a true/false line for the summary.
@@ -295,6 +327,30 @@ unsigned int testHelperMarkAnyAll (unsigned int correct,
 //
 void testHelperPrintMark (unsigned int achieved,
                           unsigned int maximum);
+
+//
+//  testHelperPrintMarkPartial
+//
+//  Purpose: To print the student mark for a partial mark
+//           summary.  This may be part way through the output
+//           or at the end end of a test file whose contents are
+//           included in another file.
+//  Parameter(s):
+//    <1> achieved: The student mark
+//    <2> highest_possible: The largest achievable mark
+//    <3> maximum: The theoretical maximum mark
+//  Precondition(s):
+//    <1> maximum > 0
+//    <2> achieved <= highest_possible
+//    <3> highest_possible < maximum
+//  Returns: N/A
+//  Side Effect: The student mark is printed.  If the student
+//               achieved a score of highest_possible, an
+//               additional message is printed to show this.
+//
+void testHelperPrintMarkPartial (unsigned int achieved,
+                                 unsigned int highest_possible,
+                                 unsigned int maximum);
 
 //
 //  testHelperWaitForEnter

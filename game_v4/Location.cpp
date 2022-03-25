@@ -5,21 +5,20 @@
 #include "Location.h"
 
 #include <iostream>
-#include <iomanip>
 
 using namespace std;
+
+static const unsigned int INACCESSIBLE = 0;
 
 
 
 Location :: Location ()
-		: row(0),
-		  column(0)
+		: node(INACCESSIBLE)
 {
 }
 
-Location :: Location (int row1, int column1)
-		: row   (row1),
-		  column(column1)
+Location :: Location (unsigned int node1)
+		: node(node1)
 {
 }
 
@@ -27,8 +26,12 @@ Location :: Location (int row1, int column1)
 
 bool Location :: operator== (const Location& other) const
 {
-	return row    == other.row    &&
-	       column == other.column;
+	return node == other.node;
+}
+
+bool Location :: isInaccessible () const
+{
+	return node == INACCESSIBLE;
 }
 
 
@@ -36,7 +39,9 @@ bool Location :: operator== (const Location& other) const
 ostream& operator<< (ostream& out,
                      const Location& location)
 {
-	cout << "(row = "     << setw(1) << right << location.row
-	     << ", column = " << setw(1) << right << location.column << ")";
+	if(location.node == INACCESSIBLE)
+		cout << "(node = INACCESSIBLE)";
+	else
+		cout << "(node = " << location.node << ")";
 	return out;
 }

@@ -11,35 +11,32 @@
 #include <fstream>
 
 #include "Location.h"
+#include "Node.h"
 
 using namespace std;
 
 
 
+
 World :: World (const string& game_name)
 {
-	loadNodes       (game_name + "_grid.txt");
+	loadNodes       (game_name + "_nodes.txt");
 	loadDescriptions(game_name + "_text.txt");
 
-	assert(invariant());
+	assert(isInvariantTrue());
 }
 
 
 
 void World :: debugPrint () const
 {
-	cout << "Nodes (" << ROW_COUNT << " x " << COLUMN_COUNT << "):" << endl;
-	cout << "----------------" << endl;
-	for(unsigned int r = 0; r < ROW_COUNT; r++)
+	cout << "Nodes (" << node_count << "):" << endl;
+	cout << "-----------" << endl;
+	cout << node_count << endl;
+	cout << start_node << "\t" << victory_node << "\t" << start_message << "\t" << end_message << endl;
+	for(unsigned int n = 0; n < node_count; n++)
 	{
-		for(unsigned int c = 0; c < COLUMN_COUNT; c++)
-		{
-			cout << nodes[r][c];
-			if(c + 1 < COLUMN_COUNT)
-				cout << "\t";
-			else
-				cout << endl;
-		}
+		nodes[n].debugPrint();
 	}
 	cout << endl;
 
@@ -53,193 +50,134 @@ void World :: debugPrint () const
 
 bool World :: isValid (const Location& location) const
 {
-	assert(invariant());
+	assert(isInvariantTrue());
 
-	if(location.row    <  0)
-		return false;
-	if(location.column <  0)
-		return false;
-	if(location.row    >= ROW_COUNT)
-		return false;
-	if(location.column >= COLUMN_COUNT)
-		return false;
-	return true;
+	return location.node < node_count;
 }
 
 bool World :: isDeath (const Location& location) const
 {
-	assert(invariant());
+	assert(isInvariantTrue());
 	assert(isValid(location));
 
-	if(nodes[location.row][location.column] == DEATH_NODE)
-		return true;
-	else
-		return false;
+	return nodes[location.node].isDeath();
 }
 
 bool World :: isVictory (const Location& location) const
 {
-	assert(invariant());
+	assert(isInvariantTrue());
 	assert(isValid(location));
 
-	if(nodes[location.row][location.column] == VICTORY_NODE)
-		return true;
-	else
-		return false;
+	return location.node == victory_node;
 }
 
 bool World :: canGoNorth (const Location& location) const
 {
-	assert(invariant());
+	assert(isInvariantTrue());
 	assert(isValid(location));
 
-	Location north = location;
-	north.row--;
-
-	if(!isValid(north))
-		return false;
-	if(nodes[north.row][north.column] == INACCESSIBLE)
+	if(nodes[location.node].getNorth().isInaccessible())
 		return false;
 	return true;
 }
 
 bool World :: canGoSouth (const Location& location) const
 {
-	assert(invariant());
+	assert(isInvariantTrue());
 	assert(isValid(location));
 
-	Location south = location;
-	south.row++;
-
-	if(!isValid(south))
-		return false;
-	if(nodes[south.row][south.column] == INACCESSIBLE)
+	if(nodes[location.node].getSouth().isInaccessible())
 		return false;
 	return true;
 }
 
 bool World :: canGoEast (const Location& location) const
 {
-	assert(invariant());
+	assert(isInvariantTrue());
 	assert(isValid(location));
 
-	Location east = location;
-	east.column++;
-
-	if(!isValid(east))
-		return false;
-	if(nodes[east.row][east.column] == INACCESSIBLE)
+	if(nodes[location.node].getEast().isInaccessible())
 		return false;
 	return true;
 }
 
 bool World :: canGoWest (const Location& location) const
 {
-	assert(invariant());
+	assert(isInvariantTrue());
 	assert(isValid(location));
 
-	Location west = location;
-	west.column--;
-
-	if(!isValid(west))
-		return false;
-	if(nodes[west.row][west.column] == INACCESSIBLE)
+	if(nodes[location.node].getWest().isInaccessible())
 		return false;
 	return true;
 }
 
 Location World :: getNorth (const Location& location) const
 {
-	assert(invariant());
+	assert(isInvariantTrue());
 	assert(isValid(location));
 	assert(canGoNorth(location));
 
-	Location north = location;
-	north.row--;
-	assert(isValid(north));
-
-	return north;
+	return Location(nodes[location.node].getNorth());
 }
 
 Location World :: getSouth (const Location& location) const
 {
-	assert(invariant());
+	assert(isInvariantTrue());
 	assert(isValid(location));
 	assert(canGoSouth(location));
 
-	Location south = location;
-	south.row++;
-	assert(isValid(south));
-
-	return south;
+	return Location(nodes[location.node].getSouth());
 }
 
 Location World :: getEast (const Location& location) const
 {
-	assert(invariant());
+	assert(isInvariantTrue());
 	assert(isValid(location));
 	assert(canGoEast(location));
 
-	Location east = location;
-	east.column++;
-	assert(isValid(east));
-
-	return east;
+	return Location(nodes[location.node].getEast());
 }
 
 Location World :: getWest (const Location& location) const
 {
-	assert(invariant());
+	assert(isInvariantTrue());
 	assert(isValid(location));
 	assert(canGoWest(location));
 
-	Location west = location;
-	west.column--;
-	assert(isValid(west));
-
-	return west;
+	return Location(nodes[location.node].getWest());
 }
 
 Location World :: getStart () const
 {
-	assert(invariant());
+	assert(isInvariantTrue());
 
-	for(unsigned int r = 0; r < ROW_COUNT; r++)
-	{
-		for(unsigned int c = 0; c < COLUMN_COUNT; c++)
-		{
-			if(nodes[r][c] == START_NODE)
-				return Location(r, c);
-		}
-	}
-
-	return NO_SUCH_VALUE;
+	return start_node;
 }
 
 void World :: printStartMessage () const
 {
-	assert(invariant());
+	assert(isInvariantTrue());
 
-	assert(START_MESSAGE < MAX_DESCRIPTION_COUNT);
-	assert(START_MESSAGE < description_count);
-	cout << descriptions[START_MESSAGE];
+	assert(start_message < MAX_DESCRIPTION_COUNT);
+	assert(start_message < description_count);
+	cout << descriptions[start_message];
 }
 
 void World :: printEndMessage () const
 {
-	assert(invariant());
+	assert(isInvariantTrue());
 
-	assert(END_MESSAGE < MAX_DESCRIPTION_COUNT);
-	assert(END_MESSAGE < description_count);
-	cout << descriptions[END_MESSAGE];
+	assert(end_message < MAX_DESCRIPTION_COUNT);
+	assert(end_message < description_count);
+	cout << descriptions[end_message];
 }
 
 void World :: printDescription (const Location& location) const
 {
-	assert(invariant());
+	assert(isInvariantTrue());
 	assert(isValid(location));
 
-	unsigned int index = nodes[location.row][location.column];
+	unsigned int index = nodes[location.node].getDescription();
 	assert(index < MAX_DESCRIPTION_COUNT);
 	assert(index < description_count);
 	cout << descriptions[index];
@@ -251,27 +189,69 @@ void World :: loadNodes (const string& filename)
 {
 	assert(filename != "");
 
-	ifstream fin;
-	fin.open(filename.c_str());
-	if(!fin.good())
+	ifstream fin(filename.c_str());
+	if(!fin)
 	{
 		cout << "Error: Could not open file \"" << filename << "\"" << endl;
 		exit(EXIT_FAILURE);  // end program immediately
 	}
 
-	for(unsigned int r = 0; r < ROW_COUNT; r++)
+	// read first line (number of nodes)
+	fin >> node_count;
+
+	// read second line (start and victory node indexes, start and end messages)
+	fin >> start_node;
+	fin >> victory_node;
+	fin >> start_message;
+	fin >> end_message;
+
+	// discard anything else on start/victory line
+	string end_of_start_line;
+	getline(fin, end_of_start_line);
+
+	// read nodes, one line at a time
+	for(unsigned int n = 0; n < node_count; n++)
 	{
-		for(unsigned int c = 0; c < COLUMN_COUNT; c++)
+		// read node type
+		char node_type;
+		fin >> node_type;
+
+		// read description
+		unsigned int description;
+		fin >> description;
+
+		// read links (node index in each direction)
+		unsigned int north;
+		unsigned int south;
+		unsigned int east;
+		unsigned int west;
+		fin >> north;
+		fin >> south;
+		fin >> east;
+		fin >> west;
+
+		// construct Node object for array
+		if(node_type == 'N')
+			nodes[n] = Node(description, north, south, east, west, false);
+		else if(node_type == 'D')
+			nodes[n] = Node(description, north, south, east, west, true);
+		else if(node_type == 'O')
 		{
-			fin >> nodes[r][c];
+			// these will be ObstructedNodes in Assignment 6
+			nodes[n] = Node(description, north, south, east, west, false);
 		}
+
+		// discard anything else on the line
+		string end_of_node_line;
+		getline(fin, end_of_node_line);
 	}
 
-	if(!fin)
-	{
-		cout << "Error: While reading file \"" << filename << "\"" << endl;
-		exit(EXIT_FAILURE);  // end program immediately
-	}
+	// fails if no blank line at the end
+	//if(!fin)
+	//{
+	//	cout << "Error: While reading file \"" << filename << "\"" << endl;
+	//	exit(EXIT_FAILURE);  // end program immediately
+	//}
 }
 
 void World :: loadDescriptions (const string& filename)
@@ -307,25 +287,33 @@ void World :: loadDescriptions (const string& filename)
 		}
 	}
 
-	if(!fin)
-	{
-		cout << "Error: While reading file \"" << filename << "\"" << endl;
-		exit(EXIT_FAILURE);  // end program immediately
-	}
+	// fails if no blank line at the end
+	//if(!fin)
+	//{
+	//	cout << "Error: While reading file \"" << filename << "\"" << endl;
+	//	exit(EXIT_FAILURE);  // end program immediately
+	//}
 }
 
-bool World :: invariant () const
+bool World :: isInvariantTrue () const
 {
+	if(node_count > MAX_NODE_COUNT)
+		return false;
+	if(start_node >= node_count)
+		return false;
+	if(victory_node >= node_count)
+		return false;
 	if(description_count > MAX_DESCRIPTION_COUNT)
 		return false;
+	if(start_message >= description_count)
+		return false;
+	if(end_message >= description_count)
+		return false;
 
-	for(unsigned int r = 0; r < ROW_COUNT; r++)
+	for(unsigned int n = 0; n < node_count; n++)
 	{
-		for(unsigned int c = 0; c < COLUMN_COUNT; c++)
-		{
-			if(nodes[r][c] >= description_count)
-				return false;
-		}
+		if(nodes[n].getDescription() >= description_count)
+			return false;
 	}
 
 	for(unsigned int d = 0; d < description_count; d++)

@@ -221,7 +221,7 @@ public:
 
 private:
 //
-//  invariant
+//  isInvariantTrue
 //
 //  Purpose: To determine if the class invariant is true.
 //  Parameter(s): N/A
@@ -229,7 +229,7 @@ private:
 //  Returns: Whether the class invarint is true.
 //  Side Effect: N/A
 //
-	bool invariant () const;
+	bool isInvariantTrue () const;
 
 private:
 	char id;

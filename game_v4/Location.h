@@ -17,8 +17,8 @@
 //    uniquely identify a node.
 //
 //  The Location class is not encapsulated, so the member fields
-//    can be accessed using dot notation.  The member fields are
-//    named row and column.
+//    can be accessed using dot notation.  The member field is
+//    named node, and represents the node index.
 //
 class Location
 {
@@ -31,7 +31,7 @@ public:
 //  Precondition(s): N/A
 //  Returns: N/A
 //  Side Effect: A new Location is created that represents node
-//               (0, 0).
+//               0.
 //
 	Location ();
 
@@ -41,14 +41,13 @@ public:
 //  Purpose: To create an Location representing the specified
 //           node.
 //  Parameter(s):
-//    <1> row1:    The node row
-//    <2> column1: The node column
+//    <1> node1: The node index
 //  Precondition(s): N/A
 //  Returns: N/A
-//  Side Effect: A new Location is created that represents node
-//               (row1, column1).
+//  Side Effect: A new Location is created that represents the
+//               node with index index.
 //
-	Location (int row1, int column1);
+	Location (unsigned int node1);
 
 //
 //  Equality Test Operator
@@ -64,9 +63,20 @@ public:
 //
 	bool operator== (const Location& other) const;
 
+//
+//  isInaccessible
+//
+//  Purpose: To determine if this Locations represents an
+//           inaccessible node.
+//  Parameter(s): N/A
+//  Precondition(s): N/A
+//  Returns: Whether this Location is inaccessible.
+//  Side Effect: N/A
+//
+	bool isInaccessible () const;
+
 public:
-	int row;
-	int column;
+	unsigned int node;
 };
 
 //
@@ -84,4 +94,5 @@ public:
 //
 std::ostream& operator<< (std::ostream& out,
                           const Location& location);
+
 
